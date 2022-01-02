@@ -1,0 +1,40 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Telegram.Bot;
+using Telegram.Bot.Args;
+
+namespace ConsleApp1
+{
+    internal class Program
+    {
+        static TelegramBotClient botClient = new TelegramBotClient("5046444026:AAEqUDJsfFFrwrgCbKXWuKVYAPODHWIJZBI");
+        static void Main(string[] args)
+        {
+            botClient.OnMessage += botClient_OnMessage;
+            botClient.StartReceiving();
+
+            Console.ReadKey();
+        }
+        private static void botClient_OnMessage(object sender, MessageEventArgs e)
+        {
+            if (e.Message.Text == "/start")
+            {
+                botClient.SendTextMessageAsync(e.Message.Chat.Id, "Hi, " + e.Message.Chat.FirstName + "\n Press: /phone_number\n Press: /parking ");
+            }
+            if (e.Message.Text == "/phone_number")
+            {
+                var title = "096330";
+                botClient.SendTextMessageAsync(e.Message.Chat.Id, " number :" + title);
+            }
+            if (e.Message.Text == "/parking")
+            {
+               var title2 ="02151007199";
+                botClient.SendTextMessageAsync(e.Message.Chat.Id, " nunmber :" + title2);
+            }
+        }
+    }
+}
+
